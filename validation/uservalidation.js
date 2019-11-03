@@ -10,12 +10,35 @@ validatesignup = (req, res, next) => {
 	}
 	if (
 		!(
-			!!data.username &&
-			validator.isByteLength(data.username, { min: 4, max: 10 })
+			!!data.firstrname &&
+			validator.isByteLength(data.firstname, { min: 4, max: 10 })
 		)
 	) {
 		return res.status(422).json({
-			err: 'username required or should be length of 4 to 10 ',
+			err: 'firstname required or should be length of 4 to 10 ',
+			success: false
+		});
+	}
+	arr=["A Positive","B Positive","O Positive","A Negative","B Negative","O Negative","AB Negative","AB Positive"];
+	if (
+		!(
+			!!data.firstrname &&
+			arr.include(data.bloodgroup)
+		)
+	) {
+		return res.status(422).json({
+			err: 'firstname required or should be length of 4 to 10 ',
+			success: false
+		});
+	}
+	if (
+		!(
+			!!data.lastrname &&
+			validator.isByteLength(data.lastname, { min: 4, max: 10 })
+		)
+	) {
+		return res.status(422).json({
+			err: 'lastname required or should be length of 4 to 10 ',
 			success: false
 		});
 	}

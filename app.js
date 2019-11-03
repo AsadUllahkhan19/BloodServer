@@ -5,8 +5,8 @@ var logger = require('morgan');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const usersRouter=require('./routes/user');
-const tweetRouter=require("./routes/tweet");
-
+const postRouter=require("./routes/Post");
+const CommentRouter=require('./routes/comment')
 var app = express();
 // express use functions
 app.use(logger('dev'));
@@ -16,13 +16,19 @@ app.use(cookieParser());
 app.use(cors());
 
 //mongodb connection
-mongoose.connect('mongodb://127.0.0.1:27017/tweets', {useNewUrlParser: true}).then(() => {
+mongoose.connect('mongodb://127.0.0.1:27017/bloodbank', {useNewUrlParser: true}).then(() => {
     console.log('db connected');
 }).catch((err) => {
     console.log(err);
 });
+app.get ('/',(req,res)=>{
+    res.send("hi")
+})
 
 app.use('/users', usersRouter);
-app.use('/tweet', tweetRouter);
+app.use('/post', postRouter);
+app.use('/comment', CommentRouter);
 
-module.exports = app;
+app.listen("5000",()=>{
+    console.log("start")
+})
